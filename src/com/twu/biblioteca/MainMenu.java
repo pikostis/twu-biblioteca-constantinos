@@ -4,16 +4,27 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MainMenu {
-    public static final int QUIT_OPTION = 0;
+    private static final int QUIT_OPTION = 0;
     private String[] options = new String[1];
     private int optionsSize = options.length;
 
     public MainMenu() {
         options[0] = "1. List Books";
+        welcomeMessage();
     }
 
-    public String[] listOptions() {
+    private void welcomeMessage() {
+        System.out.println("Welcome to Biblioteca. Biblioteca is up and running...");
+    }
+
+    public String[] menuOptions() {
         return options;
+    }
+
+    public void listMenuOptions() {
+        for (String option : options){
+            System.out.println(option);
+        }
     }
 
     public int getUserOption(InputStream inputStream) {
@@ -21,7 +32,7 @@ public class MainMenu {
         return input.nextInt();
     }
 
-    public boolean checkIfOptionIsValid(int userOption) {
+    public boolean isOptionValid(int userOption) {
         if (userOption >= optionsSize && userOption <= optionsSize) {
             return true;
         } else {
@@ -31,6 +42,6 @@ public class MainMenu {
     }
 
     public boolean checkIsQuit(int userOption) {
-        return (userOption == QUIT_OPTION) ? true : false;
+        return userOption == QUIT_OPTION;
     }
 }

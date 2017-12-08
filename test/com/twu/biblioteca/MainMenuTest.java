@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -10,17 +11,22 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class MainMenuTest {
+    static MainMenu menu;
+
+    @BeforeClass
+    public static void setUp() {
+        System.out.println("setting up");
+        menu = new MainMenu();
+    }
 
     @Test
     public void shouldReturnMenuChoices() {
-        MainMenu menu = new MainMenu();
-        String[] options = menu.listOptions();
+        String[] options = menu.menuOptions();
         assertEquals(options[0], "1. List Books");
     }
 
     @Test
     public void shouldGetFirstOptionFromUser() {
-        MainMenu menu = new MainMenu();
         InputStream fakeInput = new ByteArrayInputStream("1".getBytes());;
         int userOption = menu.getUserOption(fakeInput);
         assertEquals(userOption , 1);
@@ -28,25 +34,22 @@ public class MainMenuTest {
 
     @Test
     public void shouldCheckValidInput() {
-        MainMenu menu = new MainMenu();
         InputStream fakeInput = new ByteArrayInputStream("1".getBytes());;
         int userOption = menu.getUserOption(fakeInput);
-        boolean isOptionValid = menu.checkIfOptionIsValid(userOption);
+        boolean isOptionValid = menu.isOptionValid(userOption);
         assertTrue(isOptionValid);
     }
 
     @Test
     public void shouldCheckInvalidInput() {
-        MainMenu menu = new MainMenu();
         InputStream fakeInput = new ByteArrayInputStream("2".getBytes());;
         int userOption = menu.getUserOption(fakeInput);
-        boolean isOptionInvalid = menu.checkIfOptionIsValid(userOption);
+        boolean isOptionInvalid = menu.isOptionValid(userOption);
         assertFalse(isOptionInvalid);
     }
 
     @Test
     public void shouldQuit() {
-        MainMenu menu = new MainMenu();
         InputStream fakeInput = new ByteArrayInputStream("0".getBytes());;
         int userOption = menu.getUserOption(fakeInput);
         boolean isOptionQuit = menu.checkIsQuit(userOption);
@@ -55,7 +58,6 @@ public class MainMenuTest {
 
     @Test
     public void shouldNotQuit() {
-        MainMenu menu = new MainMenu();
         InputStream fakeInput = new ByteArrayInputStream("1".getBytes());;
         int userOption = menu.getUserOption(fakeInput);
         boolean isOptionNotQuit = menu.checkIsQuit(userOption);
