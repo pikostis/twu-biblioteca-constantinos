@@ -11,10 +11,10 @@ public class BookTest {
     String bookTitle = "TDD by example";
     Date bookReleaseDate = new Date(1990,2,23);
     Book book = new Book(bookTitle, bookAuthor, bookReleaseDate);
-    
+
     @Test
     public void shouldReturnBookAuthor() {
-        assertEquals(book.getAuthor(), "Kent Beck");
+        assertEquals(book.getAuthor(), bookAuthor);
     }
 
     @Test
