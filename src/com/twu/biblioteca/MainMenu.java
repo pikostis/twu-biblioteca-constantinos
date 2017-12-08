@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class MainMenu {
     private String[] options = new String[1];
+    private int optionsSize = options.length;
 
     public MainMenu() {
         options[0] = "1. List Books";
@@ -20,6 +21,11 @@ public class MainMenu {
     }
 
     public boolean checkIfOptionIsValid(int userOption) {
-        return (userOption >= 1 && userOption <= 1) ? true : false;
+        if (userOption >= optionsSize && userOption <= optionsSize) {
+            return true;
+        } else {
+            System.out.println("Select a valid option!");
+            return false;
+        }
     }
 }

@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class MainMenuTest {
@@ -32,5 +33,14 @@ public class MainMenuTest {
         int userOption = menu.getUserOption(fakeInput);
         boolean isOptionValid = menu.checkIfOptionIsValid(userOption);
         assertTrue(isOptionValid);
+    }
+
+    @Test
+    public void shouldCheckInvalidInput() {
+        MainMenu menu = new MainMenu();
+        InputStream fakeInput = new ByteArrayInputStream("2".getBytes());;
+        int userOption = menu.getUserOption(fakeInput);
+        boolean isOptionInvalid = menu.checkIfOptionIsValid(userOption);
+        assertFalse(isOptionInvalid);
     }
 }
