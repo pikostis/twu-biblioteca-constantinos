@@ -43,4 +43,22 @@ public class MainMenuTest {
         boolean isOptionInvalid = menu.checkIfOptionIsValid(userOption);
         assertFalse(isOptionInvalid);
     }
+
+    @Test
+    public void shouldQuit() {
+        MainMenu menu = new MainMenu();
+        InputStream fakeInput = new ByteArrayInputStream("0".getBytes());;
+        int userOption = menu.getUserOption(fakeInput);
+        boolean isOptionQuit = menu.checkIsQuit(userOption);
+        assertTrue(isOptionQuit);
+    }
+
+    @Test
+    public void shouldNotQuit() {
+        MainMenu menu = new MainMenu();
+        InputStream fakeInput = new ByteArrayInputStream("1".getBytes());;
+        int userOption = menu.getUserOption(fakeInput);
+        boolean isOptionNotQuit = menu.checkIsQuit(userOption);
+        assertFalse(isOptionNotQuit);
+    }
 }

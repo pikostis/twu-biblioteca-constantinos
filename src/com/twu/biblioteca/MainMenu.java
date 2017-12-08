@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class MainMenu {
+    public static final int QUIT_OPTION = 0;
     private String[] options = new String[1];
     private int optionsSize = options.length;
 
@@ -27,5 +28,9 @@ public class MainMenu {
             System.out.println("Select a valid option!");
             return false;
         }
+    }
+
+    public boolean checkIsQuit(int userOption) {
+        return (userOption == QUIT_OPTION) ? true : false;
     }
 }
