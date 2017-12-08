@@ -7,24 +7,18 @@ public class Book {
     private Date bookReleaseDate;
     private String bookTitle;
 
-    public void setBookAuthor (String bookAuthor) {
+    public Book(String bookTitle, String bookAuthor, Date bookReleaseDate) {
+        this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
+        this.bookReleaseDate = bookReleaseDate;
     }
 
     public String getAuthor() {
         return this.bookAuthor;
     }
 
-    public void setReleaseDate(Date date) {
-        this.bookReleaseDate = date;
-    }
-
     public Date getRealeaseDate() {
         return this.bookReleaseDate;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
     }
 
     public String getBookTitle() {
