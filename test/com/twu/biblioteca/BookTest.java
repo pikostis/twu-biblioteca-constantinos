@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.Date;
 import static junit.framework.TestCase.assertEquals;
@@ -7,10 +9,21 @@ import static junit.framework.TestCase.assertEquals;
 
 public class BookTest {
 
-    String bookAuthor = "Kent Beck";
-    String bookTitle = "TDD by example";
-    Date bookReleaseDate = new Date(1990,2,23);
-    Book book = new Book(bookTitle, bookAuthor, bookReleaseDate);
+    static String bookAuthor;
+    static String bookTitle;
+    static Date bookReleaseDate;
+    static Book book;
+
+    @BeforeClass
+    public static void initialize() {
+        System.out.println("creating a book...");
+
+        bookAuthor = "Kent Beck";
+        bookTitle = "TDD by example";
+        bookReleaseDate = new Date(1990,2,23);
+
+        book = new Book(bookTitle, bookAuthor, bookReleaseDate);
+    }
 
     @Test
     public void shouldReturnBookAuthor() {
