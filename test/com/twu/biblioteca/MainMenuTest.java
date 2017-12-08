@@ -1,0 +1,36 @@
+package com.twu.biblioteca;
+
+import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+
+public class MainMenuTest {
+
+    @Test
+    public void shouldReturnMenuChoices() {
+        MainMenu menu = new MainMenu();
+        String[] options = menu.listOptions();
+        assertEquals(options[0], "1. List Books");
+    }
+
+    @Test
+    public void shouldGetFirstOptionFromUser() {
+        MainMenu menu = new MainMenu();
+        InputStream fakeInput = new ByteArrayInputStream("1".getBytes());;
+        int userOption = menu.getUserOption(fakeInput);
+        assertEquals(userOption , 1);
+    }
+
+    @Test
+    public void shouldCheckValidInput() {
+        MainMenu menu = new MainMenu();
+        InputStream fakeInput = new ByteArrayInputStream("1".getBytes());;
+        int userOption = menu.getUserOption(fakeInput);
+        boolean isOptionValid = menu.checkIfOptionIsValid(userOption);
+        assertTrue(isOptionValid);
+    }
+}
