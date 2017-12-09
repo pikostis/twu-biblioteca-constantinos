@@ -27,6 +27,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return bookTitle + " | " + bookAuthor + " | " + bookReleaseDate;
+        return getBookTitle() + "\t|\t" + getAuthor() + "\t|\t" + getRealeaseDate();
     }
 }

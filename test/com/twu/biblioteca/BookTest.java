@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.Date;
@@ -42,7 +41,7 @@ public class BookTest {
 
     @Test
     public void shouldReturnStringRepresentationOfBook() {
-        assertEquals(book.toString(), book.getBookTitle() + " | " + book.getAuthor() + " | " + book.getRealeaseDate());
+        assertEquals(book.toString(), book.getBookTitle() + "\t|\t" + book.getAuthor() + "\t|\t" + book.getRealeaseDate());
     }
 
 }
