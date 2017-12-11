@@ -87,4 +87,27 @@ public class BookRentService {
             return true;
         }
     }
+
+    public boolean searchUnavailableBooks(Set<Book> unAvailableBooks, String bookTitle) {
+        boolean bookFound = false;
+        Book bookToReturn = null;
+
+        for (Book book : unAvailableBooks) {
+            if (book.getBookTitle().equals(bookTitle)) {
+                bookToReturn = book;
+                bookFound = true;
+                System.out.println("Thank you for returning the book.");
+                break;
+            }
+        }
+
+        if (!bookFound) {
+            System.out.println("That is not a valid book to return.");
+            return false;
+        } else {
+            addAvailableBook(bookToReturn);
+            removeUnAvailableBook(bookToReturn);
+            return true;
+        }
+    }
 }

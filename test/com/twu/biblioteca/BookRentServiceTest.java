@@ -36,6 +36,7 @@ public class BookRentServiceTest {
 
         bookRentService = new BookRentService();
         bookRentService.addAvailableBook(book);
+        bookRentService.addUnAvailableBook(unavalableBook);
 
     }
 
@@ -62,6 +63,22 @@ public class BookRentServiceTest {
         String bookName = "TDD by example";
         Set<Book> availableBooks = bookRentService.getAvailableBooks();
         boolean isBookFound = bookRentService.searchAvailableBooks(availableBooks, bookName);
+        assertTrue(isBookFound);
+    }
+
+    @Test
+    public void shouldReturnFalseIfBookIsUnavailableForCheckout() {
+        String bookName = "TDD by example 2";
+        Set<Book> availableBooks = bookRentService.getAvailableBooks();
+        boolean isBookFound = bookRentService.searchAvailableBooks(availableBooks, bookName);
+        assertFalse(isBookFound);
+    }
+
+    @Test
+    public void shouldReturnTrueIfBookIsForReturn() {
+        String bookName = "TDD by example 2";
+        Set<Book> unAvailableBooks = bookRentService.getUnAvailableBooks();
+        boolean isBookFound = bookRentService.searchUnavailableBooks(unAvailableBooks, bookName);
         assertTrue(isBookFound);
     }
 
