@@ -5,21 +5,12 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import static junit.framework.TestCase.assertEquals;
+
 public class ListBooksMenuOptionTest {
 
     @Test
     public void shouldReturnAllBooks() {
-        String bookAuthor = "Kent Beck";
-        String bookTitle = "TDD by example";
-        Date bookReleaseDate = new Date(1990,2,23);
-
-        Book book = new Book(bookTitle, bookAuthor, bookReleaseDate);
-        book.setBookAvailableForCheckout(true);
-
-        BookRentService bookRentService = new BookRentService();
-        bookRentService.addBooks(book);
-
-        ListBooksMenuOption listBooksMenuOption = new ListBooksMenuOption();
-        listBooksMenuOption.execute(bookRentService);
+        assertEquals("List Books", new ListBooksMenuOption().name());
     }
 }

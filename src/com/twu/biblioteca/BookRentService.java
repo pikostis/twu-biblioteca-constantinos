@@ -92,4 +92,8 @@ public class BookRentService {
             return false;
         }
     }
+
+    public void destroyApp() {
+        System.exit(0);
+    }
 }

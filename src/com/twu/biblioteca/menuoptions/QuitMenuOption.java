@@ -10,6 +10,6 @@ public class QuitMenuOption implements IMenuOption {
 
     @Override
     public void execute(BookRentService bookRentService) {
-        System.exit(0);
+        bookRentService.destroyApp();
     }
 }
