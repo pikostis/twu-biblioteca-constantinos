@@ -1,8 +1,11 @@
 package com.twu.biblioteca.menuoptions;
 
+import com.twu.biblioteca.Book;
 import com.twu.biblioteca.BookRentService;
+
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ReturnMenuOption implements IMenuOption {
     @Override
@@ -14,7 +17,8 @@ public class ReturnMenuOption implements IMenuOption {
     public void execute(BookRentService bookRentService) {
         InputStream inputStream = System.in;
         String bookTitle = getBookTitleFromUser(inputStream);
-        bookRentService.returnBook(bookTitle);
+        Set<Book> books = bookRentService.getBooks();
+        bookRentService.returnBook(books, bookTitle);
     }
 
     private String getBookTitleFromUser(InputStream inputStream) {

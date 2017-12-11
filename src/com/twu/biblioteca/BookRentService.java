@@ -59,7 +59,7 @@ public class BookRentService {
         return books;
     }
 
-    public boolean checkoutBook(String bookTitle) {
+    public boolean checkoutBook(Set<Book> books, String bookTitle) {
         Book bookToCheckout = searchForBook(books, bookTitle);
         if (bookToCheckout == null) {
             System.out.println("That book is not available.");
@@ -76,7 +76,7 @@ public class BookRentService {
         }
     }
 
-    public boolean returnBook(String bookTitle) {
+    public boolean returnBook(Set<Book> books, String bookTitle) {
         Book bookToReturn = searchForBook(books, bookTitle);
         if (bookToReturn == null) {
             System.out.println("That is not a valid book to return.");

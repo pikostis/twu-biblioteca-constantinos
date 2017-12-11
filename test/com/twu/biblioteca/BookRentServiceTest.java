@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.Set;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -43,21 +45,24 @@ public class BookRentServiceTest {
     @Test
     public void shouldReturnTrueIfBookIsAvailableForCheckout() {
         String bookTitle = "TDD by example";
-        boolean isBookFound = bookRentService.checkoutBook(bookTitle);
+        Set<Book> books = bookRentService.getBooks();
+        boolean isBookFound = bookRentService.checkoutBook(books, bookTitle);
         assertTrue(isBookFound);
     }
 
     @Test
     public void shouldReturnFalseIfBookIsUnavailableForCheckout() {
         String bookTitle = "TDD by example 2";
-        boolean isBookAvailableForCheckout = bookRentService.checkoutBook(bookTitle);
+        Set<Book> books = bookRentService.getBooks();
+        boolean isBookAvailableForCheckout = bookRentService.checkoutBook(books, bookTitle);
         assertFalse(isBookAvailableForCheckout);
     }
 
     @Test
     public void shouldReturnTrueIfBookIsAvailableForReturn() {
         String bookTitle = "TDD by example 2";
-        boolean isBookFound = bookRentService.returnBook(bookTitle);
+        Set<Book> books = bookRentService.getBooks();
+        boolean isBookFound = bookRentService.returnBook(books, bookTitle);
         assertTrue(isBookFound);
     }
 
