@@ -64,24 +64,29 @@ public class BookRentService {
         unAvailableBooks.remove(book);
     }
 
-    public boolean searchAvailableBooks(Set<Book> availableBooks, String bookTitle) {
+    public boolean searchAvailableBooks(Set<Book> books, String bookTitle) {
+        Book bookToSearch = searchForBook(books, bookTitle);
+        return searchAvailableBookHelper(bookToSearch);
+    }
 
-        boolean bookFound = false;
-        Book bookToCheckout = null;
+    private Book searchForBook(Set<Book> books, String bookTitle) {
+        Book bookToSearch;
 
-        for (Book book : availableBooks) {
+        for (Book book : books) {
             if (book.getBookTitle().equals(bookTitle)) {
-                bookToCheckout = book;
-                bookFound = true;
-                System.out.println("Thank you! Enjoy the book");
-                break;
+                bookToSearch = book;
+                return bookToSearch;
             }
         }
+        return null;
+    }
 
-        if (!bookFound) {
+    private boolean searchAvailableBookHelper(Book bookToCheckout) {
+        if (bookToCheckout == null) {
             System.out.println("That book is not available.");
             return false;
         } else {
+            System.out.println("Thank you! Enjoy the book");
             removeAvailable(bookToCheckout);
             addUnAvailableBook(bookToCheckout);
             return true;
@@ -89,22 +94,16 @@ public class BookRentService {
     }
 
     public boolean searchUnavailableBooks(Set<Book> unAvailableBooks, String bookTitle) {
-        boolean bookFound = false;
-        Book bookToReturn = null;
+        Book bookToReturn = searchForBook(unAvailableBooks, bookTitle);
+        return searchUnavailableBookHelper(bookToReturn);
+    }
 
-        for (Book book : unAvailableBooks) {
-            if (book.getBookTitle().equals(bookTitle)) {
-                bookToReturn = book;
-                bookFound = true;
-                System.out.println("Thank you for returning the book.");
-                break;
-            }
-        }
-
-        if (!bookFound) {
+    private boolean searchUnavailableBookHelper(Book bookToReturn) {
+        if (bookToReturn == null) {
             System.out.println("That is not a valid book to return.");
             return false;
         } else {
+            System.out.println("Thank you for returning the book.");
             addAvailableBook(bookToReturn);
             removeUnAvailableBook(bookToReturn);
             return true;

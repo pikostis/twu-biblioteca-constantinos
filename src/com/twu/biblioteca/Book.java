@@ -6,6 +6,7 @@ public class Book {
     private String bookAuthor;
     private Date bookReleaseDate;
     private String bookTitle;
+    private boolean isBookAvailableForCheckout;
 
     public Book(String bookTitle, String bookAuthor, Date bookReleaseDate) {
         this.bookTitle = bookTitle;
@@ -28,5 +29,13 @@ public class Book {
     @Override
     public String toString() {
         return getBookTitle() + "\t|\t" + getAuthor() + "\t|\t" + getRealeaseDate();
+    }
+
+    public boolean isBookAvailableForCheckout() {
+        return isBookAvailableForCheckout;
+    }
+
+    public void setBookAvailableForCheckout(boolean bookAvailableForCheckout) {
+        isBookAvailableForCheckout = bookAvailableForCheckout;
     }
 }

@@ -4,6 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.Date;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 
 public class BookTest {
@@ -22,6 +23,7 @@ public class BookTest {
         bookReleaseDate = new Date(1990,2,23);
 
         book = new Book(bookTitle, bookAuthor, bookReleaseDate);
+        book.setBookAvailableForCheckout(true);
     }
 
     @Test
@@ -42,6 +44,11 @@ public class BookTest {
     @Test
     public void shouldReturnStringRepresentationOfBook() {
         assertEquals(book.toString(), book.getBookTitle() + "\t|\t" + book.getAuthor() + "\t|\t" + book.getRealeaseDate());
+    }
+
+    @Test
+    public void shouldReturnTrueIfBookIsAvailableForCheckout() {
+        assertTrue(book.isBookAvailableForCheckout());
     }
 
 }
