@@ -14,9 +14,10 @@ public class ListBooksMenuOptionTest {
         Date bookReleaseDate = new Date(1990,2,23);
 
         Book book = new Book(bookTitle, bookAuthor, bookReleaseDate);
+        book.setBookAvailableForCheckout(true);
 
         BookRentService bookRentService = new BookRentService();
-        bookRentService.addAvailableBook(book);
+        bookRentService.addBooks(book);
 
         ListBooksMenuOption listBooksMenuOption = new ListBooksMenuOption();
         listBooksMenuOption.execute(bookRentService);

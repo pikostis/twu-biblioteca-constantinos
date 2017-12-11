@@ -27,58 +27,42 @@ public class BookRentServiceTest {
         bookReleaseDate = new Date(1990,2,23);
 
         book = new Book(bookTitle, bookAuthor, bookReleaseDate);
+        book.setBookAvailableForCheckout(true);
 
         bookAuthor = "Kent Beck 2";
         bookTitle = "TDD by example 2";
         bookReleaseDate = new Date(1990,2,23);
 
         unavalableBook = new Book(bookTitle, bookAuthor, bookReleaseDate);
+        unavalableBook.setBookAvailableForCheckout(false);
 
         bookRentService = new BookRentService();
-        bookRentService.addAvailableBook(book);
-        bookRentService.addUnAvailableBook(unavalableBook);
+        bookRentService.addBooks(book);
+        bookRentService.addBooks(unavalableBook);
 
-    }
-
-    @Test
-    public void shouldReturnTrueIfBookIsAvailable() {
-        boolean isBookAvailable = bookRentService.isBookAvailable(book);
-        assertTrue(isBookAvailable);
-    }
-
-    @Test
-    public void shouldReturnFalseIfBookIsUnavailable() {
-        boolean isBookAvailable = bookRentService.isBookAvailable(unavalableBook);
-        assertFalse(isBookAvailable);
-    }
-
-    @Test
-    public void shouldPrintAllAvailableBooks() {
-        //redundant
-        bookRentService.listAvailableBooks();
     }
 
     @Test
     public void shouldReturnTrueIfBookIsAvailableForCheckout() {
-        String bookName = "TDD by example";
-        Set<Book> availableBooks = bookRentService.getAvailableBooks();
-        boolean isBookFound = bookRentService.searchAvailableBooks(availableBooks, bookName);
+        String bookTitle = "TDD by example";
+        Set<Book> books = bookRentService.getBooks();
+        boolean isBookFound = bookRentService.checkoutBook(books, bookTitle);
         assertTrue(isBookFound);
     }
 
     @Test
     public void shouldReturnFalseIfBookIsUnavailableForCheckout() {
-        String bookName = "TDD by example 2";
-        Set<Book> availableBooks = bookRentService.getAvailableBooks();
-        boolean isBookFound = bookRentService.searchAvailableBooks(availableBooks, bookName);
-        assertFalse(isBookFound);
+        String bookTitle = "TDD by example 2";
+        Set<Book> books = bookRentService.getBooks();
+        boolean isBookAvailableForCheckout = bookRentService.checkoutBook(books, bookTitle);
+        assertFalse(isBookAvailableForCheckout);
     }
 
     @Test
-    public void shouldReturnTrueIfBookIsForReturn() {
-        String bookName = "TDD by example 2";
-        Set<Book> unAvailableBooks = bookRentService.getUnAvailableBooks();
-        boolean isBookFound = bookRentService.searchUnavailableBooks(unAvailableBooks, bookName);
+    public void shouldReturnTrueIfBookIsAvailableForReturn() {
+        String bookTitle = "TDD by example 2";
+        Set<Book> books = bookRentService.getBooks();
+        boolean isBookFound = bookRentService.returnBook(books, bookTitle);
         assertTrue(isBookFound);
     }
 

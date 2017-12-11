@@ -17,8 +17,8 @@ public class CheckoutMenuOption implements IMenuOption {
     public void execute(BookRentService bookRentService) {
         InputStream inputStream = System.in;
         String bookTitle = getBookTitleFromUser(inputStream);
-        Set<Book> availableBooks = bookRentService.getAvailableBooks();
-        bookRentService.searchAvailableBooks(availableBooks, bookTitle);
+        Set<Book> books = bookRentService.getBooks();
+        bookRentService.checkoutBook(books, bookTitle);
     }
 
     private String getBookTitleFromUser(InputStream inputStream) {

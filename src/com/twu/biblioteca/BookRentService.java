@@ -5,32 +5,17 @@ import java.util.Set;
 
 public class BookRentService {
 
-    private Set<Book> availableBooks = new HashSet<Book>();
-    private Set<Book> unAvailableBooks = new HashSet<Book>();
-
-    public Set<Book> getAvailableBooks() {
-        return availableBooks;
-    }
-
-    public Set<Book> getUnAvailableBooks() {
-        return unAvailableBooks;
-    }
-
-    public boolean isBookAvailable(Book book) {
-        return this.availableBooks.contains(book);
-    }
-
-    public void addAvailableBook(Book book) {
-        this.availableBooks.add(book);
-    }
+    private Set<Book> books = new HashSet<Book>();
 
     public void listAvailableBooks() {
         printLine();
         System.out.println("Book Title");
         printLine();
 
-        for (Book book : availableBooks) {
-            System.out.println(book.getBookTitle());
+        for (Book book : books) {
+            if (book.isBookAvailableForCheckout()) {
+                System.out.println(book.getBookTitle());
+            }
         }
         printLine();
 
@@ -45,28 +30,13 @@ public class BookRentService {
         System.out.printf("%-30.30s %-30.30s %-30.30s%n", "Book Title","| Author", "| Release Date");
         printLine();
 
-        for (Book book : availableBooks) {
-            System.out.printf("%-30.30s %-30.30s %-30.30s%n", book.getBookTitle(), "| " + book.getAuthor(), "| " + book.getRealeaseDate());
+        for (Book book : books) {
+            if (book.isBookAvailableForCheckout()) {
+                System.out.printf("%-30.30s %-30.30s %-30.30s%n", book.getBookTitle(), "| " + book.getAuthor(), "| " + book.getRealeaseDate());
+            }
         }
         printLine();
 
-    }
-
-    public void addUnAvailableBook(Book book) {
-        this.unAvailableBooks.add(book);
-    }
-
-    public void removeAvailable(Book book) {
-        availableBooks.remove(book);
-    }
-
-    public void removeUnAvailableBook(Book book) {
-        unAvailableBooks.remove(book);
-    }
-
-    public boolean searchAvailableBooks(Set<Book> books, String bookTitle) {
-        Book bookToSearch = searchForBook(books, bookTitle);
-        return searchAvailableBookHelper(bookToSearch);
     }
 
     private Book searchForBook(Set<Book> books, String bookTitle) {
@@ -81,32 +51,45 @@ public class BookRentService {
         return null;
     }
 
-    private boolean searchAvailableBookHelper(Book bookToCheckout) {
+    public void addBooks(Book book) {
+        books.add(book);
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public boolean checkoutBook(Set<Book> books, String bookTitle) {
+        Book bookToCheckout = searchForBook(books, bookTitle);
         if (bookToCheckout == null) {
             System.out.println("That book is not available.");
             return false;
-        } else {
+        }
+
+        if (bookToCheckout.isBookAvailableForCheckout()) {
             System.out.println("Thank you! Enjoy the book");
-            removeAvailable(bookToCheckout);
-            addUnAvailableBook(bookToCheckout);
+            bookToCheckout.setBookAvailableForCheckout(false);
             return true;
+        } else {
+            System.out.println("That book is not available.");
+            return false;
         }
     }
 
-    public boolean searchUnavailableBooks(Set<Book> unAvailableBooks, String bookTitle) {
-        Book bookToReturn = searchForBook(unAvailableBooks, bookTitle);
-        return searchUnavailableBookHelper(bookToReturn);
-    }
-
-    private boolean searchUnavailableBookHelper(Book bookToReturn) {
+    public boolean returnBook(Set<Book> books, String bookTitle) {
+        Book bookToReturn = searchForBook(books, bookTitle);
         if (bookToReturn == null) {
             System.out.println("That is not a valid book to return.");
             return false;
-        } else {
+        }
+        boolean isBookAvailableForReturn = !bookToReturn.isBookAvailableForCheckout();
+        if (isBookAvailableForReturn) {
             System.out.println("Thank you for returning the book.");
-            addAvailableBook(bookToReturn);
-            removeUnAvailableBook(bookToReturn);
+            bookToReturn.setBookAvailableForCheckout(true);
             return true;
+        } else {
+            System.out.println("That is not a valid book to return.");
+            return false;
         }
     }
 }

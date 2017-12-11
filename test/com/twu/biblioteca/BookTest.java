@@ -4,6 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.Date;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 
@@ -51,4 +52,10 @@ public class BookTest {
         assertTrue(book.isBookAvailableForCheckout());
     }
 
+    @Test
+    public void shouldReturnFalseIfBookIsNotAvailableForCheckout() {
+        book.setBookAvailableForCheckout(false);
+        assertFalse(book.isBookAvailableForCheckout());
+        book.setBookAvailableForCheckout(true);
+    }
 }

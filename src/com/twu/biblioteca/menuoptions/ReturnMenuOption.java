@@ -17,8 +17,8 @@ public class ReturnMenuOption implements IMenuOption {
     public void execute(BookRentService bookRentService) {
         InputStream inputStream = System.in;
         String bookTitle = getBookTitleFromUser(inputStream);
-        Set<Book> unAvailableBooks = bookRentService.getUnAvailableBooks();
-        bookRentService.searchUnavailableBooks(unAvailableBooks, bookTitle);
+        Set<Book> books = bookRentService.getBooks();
+        bookRentService.returnBook(books, bookTitle);
     }
 
     private String getBookTitleFromUser(InputStream inputStream) {
