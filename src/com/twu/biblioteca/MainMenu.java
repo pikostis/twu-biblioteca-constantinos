@@ -1,15 +1,23 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.menuoptions.*;
+
 import java.io.InputStream;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainMenu {
-    private static final int QUIT_OPTION = 0;
-    private String[] options = new String[1];
-    private int optionsSize = options.length;
+    private Map<Integer, IMenuOption> options = new HashMap<Integer, IMenuOption>();
+    private int optionsSize;
 
     public MainMenu() {
-        options[0] = "1. List Books";
+        options.put(0, new ListBooksMenuOption());
+        options.put(1, new ListBooksWithDetailsMenuOption());
+        options.put(2, new CheckoutMenuOption());
+        options.put(3, new ReturnMenuOption());
+        options.put(4, new QuitMenuOption());
+
+        optionsSize = options.size();
+
         welcomeMessage();
     }
 
@@ -17,14 +25,22 @@ public class MainMenu {
         System.out.println("Welcome to Biblioteca. Biblioteca is up and running...");
     }
 
-    public String[] menuOptions() {
+    public Map<Integer, IMenuOption> menuOptions() {
         return options;
     }
 
     public void listMenuOptions() {
-        for (String option : options){
-            System.out.println(option);
+        System.out.println();
+        System.out.println("---------------------MENU---------------------");
+
+        for (Object obj : options.entrySet()) {
+            Map.Entry<Integer, IMenuOption> entry = (Map.Entry) obj;
+            System.out.print(entry.getKey() + ". ");
+            System.out.println(entry.getValue().name());
         }
+
+        System.out.println("----------------------------------------------");
+        System.out.println();
     }
 
     public int getUserOption(InputStream inputStream) {
@@ -32,16 +48,4 @@ public class MainMenu {
         return input.nextInt();
     }
 
-    public boolean isOptionValid(int userOption) {
-        if (userOption >= optionsSize && userOption <= optionsSize) {
-            return true;
-        } else {
-            System.out.println("Select a valid option!");
-            return false;
-        }
-    }
-
-    public boolean checkIsQuit(int userOption) {
-        return userOption == QUIT_OPTION;
-    }
 }

@@ -5,10 +5,16 @@ import java.util.Set;
 
 public class BookRentService {
 
-    private Set<Book> allBooks;
     private Set<Book> availableBooks = new HashSet<Book>();
     private Set<Book> unAvailableBooks = new HashSet<Book>();
 
+    public Set<Book> getAvailableBooks() {
+        return availableBooks;
+    }
+
+    public Set<Book> getUnAvailableBooks() {
+        return unAvailableBooks;
+    }
 
     public boolean isBookAvailable(Book book) {
         return this.availableBooks.contains(book);
@@ -19,35 +25,65 @@ public class BookRentService {
     }
 
     public void listAvailableBooks() {
-        System.out.println("Book Title\t\t|\tAuthor\t\t|\tRelease Date");
-        System.out.println("----------\t\t|\t------\t\t|\t------------");
+        printLine();
+        System.out.println("Book Title");
+        printLine();
 
         for (Book book : availableBooks) {
-            System.out.println(book);
+            System.out.println(book.getBookTitle());
         }
+        printLine();
+
     }
 
-    public boolean checkout(Book book) {
-        if (book == null) return false;
-        if (availableBooks.contains(book)) {
-            unAvailableBooks.add(book);
-            availableBooks.remove(book);
-            System.out.println("Thank you! Enjoy the book");
-            return true;
-        } else {
+    private void printLine() {
+        System.out.println("--------------------------------------------------------------------------------------------");
+    }
+
+    public void listAvailableBooksWithDetails() {
+        printLine();
+        System.out.printf("%-30.30s %-30.30s %-30.30s%n", "Book Title","| Author", "| Release Date");
+        printLine();
+
+        for (Book book : availableBooks) {
+            System.out.printf("%-30.30s %-30.30s %-30.30s%n", book.getBookTitle(), "| " + book.getAuthor(), "| " + book.getRealeaseDate());
+        }
+        printLine();
+
+    }
+
+    public void addUnAvailableBook(Book book) {
+        this.unAvailableBooks.add(book);
+    }
+
+    public void removeAvailable(Book book) {
+        availableBooks.remove(book);
+    }
+
+    public void removeUnAvailableBook(Book book) {
+        unAvailableBooks.remove(book);
+    }
+
+    public boolean searchAvailableBooks(Set<Book> availableBooks, String bookTitle) {
+
+        boolean bookFound = false;
+        Book bookToCheckout = null;
+
+        for (Book book : availableBooks) {
+            if (book.getBookTitle().equals(bookTitle)) {
+                bookToCheckout = book;
+                bookFound = true;
+                System.out.println("Thank you! Enjoy the book");
+                break;
+            }
+        }
+
+        if (!bookFound) {
             System.out.println("That book is not available.");
             return false;
-        }
-    }
-
-    public boolean returnBook(Book book) {
-        if (availableBooks.contains(book) || book == null) {
-            System.out.println("That is not a valid book to return.");
-            return false;
         } else {
-            availableBooks.add(book);
-            unAvailableBooks.remove(book);
-            System.out.println("Thank you for returning the book.");
+            removeAvailable(bookToCheckout);
+            addUnAvailableBook(bookToCheckout);
             return true;
         }
     }

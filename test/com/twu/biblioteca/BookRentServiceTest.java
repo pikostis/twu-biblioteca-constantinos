@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.Set;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -57,39 +58,11 @@ public class BookRentServiceTest {
     }
 
     @Test
-    public void shouldReturnTrueIfSuccessfullyCheckout() {
-        boolean isBookSuccesfullyCheckedOut = bookRentService.checkout(book);
-        assertTrue(isBookSuccesfullyCheckedOut);
-
-        isBookSuccesfullyCheckedOut = bookRentService.checkout(book);
-        assertFalse(isBookSuccesfullyCheckedOut);
+    public void shouldReturnTrueIfBookIsAvailableForCheckout() {
+        String bookName = "TDD by example";
+        Set<Book> availableBooks = bookRentService.getAvailableBooks();
+        boolean isBookFound = bookRentService.searchAvailableBooks(availableBooks, bookName);
+        assertTrue(isBookFound);
     }
 
-    @Test
-    public void shouldReturnFalseIfUnsuccessfullyCheckout() {
-        boolean isBookUnsuccesfullyCheckedOut = bookRentService.checkout(unavalableBook);
-        assertFalse(isBookUnsuccesfullyCheckedOut);
-    }
-
-    @Test
-    public void shouldReturnFalseIfNull() {
-        boolean isBookNull = bookRentService.checkout(null);
-        assertFalse(isBookNull);
-    }
-
-    @Test
-    public void shouldReturnTrueIfSuccesfullyReturned() {
-        bookRentService.checkout(book);
-        boolean isBookSuccefullyReturned = bookRentService.returnBook(book);
-        assertTrue(isBookSuccefullyReturned);
-
-        isBookSuccefullyReturned = bookRentService.returnBook(unavalableBook);
-        assertTrue(isBookSuccefullyReturned);
-    }
-
-    @Test
-    public void shouldReturnFalseIfUnsuccesfullyReturned() {
-        boolean isBookSuccefullyReturned = bookRentService.returnBook(null);
-        assertFalse(isBookSuccefullyReturned);
-    }
 }
