@@ -5,7 +5,6 @@ import com.twu.biblioteca.BookRentService;
 
 import java.io.InputStream;
 import java.util.Scanner;
-import java.util.Set;
 
 public class CheckoutMenuOption implements IMenuOption {
     @Override
@@ -17,8 +16,7 @@ public class CheckoutMenuOption implements IMenuOption {
     public void execute(BookRentService bookRentService) {
         InputStream inputStream = System.in;
         String bookTitle = getBookTitleFromUser(inputStream);
-        Set<Book> books = bookRentService.getBooks();
-        bookRentService.checkoutBook(books, bookTitle);
+        bookRentService.checkoutBook(bookTitle);
     }
 
     private String getBookTitleFromUser(InputStream inputStream) {
