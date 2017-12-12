@@ -43,11 +43,6 @@ public class BookTest {
     }
 
     @Test
-    public void shouldReturnStringRepresentationOfBook() {
-        assertEquals(book.toString(), book.getBookTitle() + "\t|\t" + book.getAuthor() + "\t|\t" + book.getRealeaseDate());
-    }
-
-    @Test
     public void shouldReturnTrueIfBookIsAvailableForCheckout() {
         assertTrue(book.isBookAvailableForCheckout());
     }

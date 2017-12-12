@@ -5,8 +5,6 @@ import java.util.Set;
 
 public class BookRentService {
 
-    private Set<Book> books = new HashSet<Book>();
-
     public void listAvailableBooks() {
         printLine();
         System.out.println("Book Title");
@@ -21,10 +19,6 @@ public class BookRentService {
 
     }
 
-    private void printLine() {
-        System.out.println("--------------------------------------------------------------------------------------------");
-    }
-
     public void listAvailableBooksWithDetails() {
         printLine();
         System.out.printf("%-30.30s %-30.30s %-30.30s%n", "Book Title","| Author", "| Release Date");
@@ -32,31 +26,15 @@ public class BookRentService {
 
         for (Book book : books) {
             if (book.isBookAvailableForCheckout()) {
-                System.out.printf("%-30.30s %-30.30s %-30.30s%n", book.getBookTitle(), "| " + book.getAuthor(), "| " + book.getRealeaseDate());
+                System.out.println(book);
             }
         }
         printLine();
 
     }
 
-    private Book searchForBook(Set<Book> books, String bookTitle) {
-        Book bookToSearch;
-
-        for (Book book : books) {
-            if (book.getBookTitle().equals(bookTitle)) {
-                bookToSearch = book;
-                return bookToSearch;
-            }
-        }
-        return null;
-    }
-
     public void addBooks(Book book) {
         books.add(book);
-    }
-
-    public Set<Book> getBooks() {
-        return books;
     }
 
     public boolean checkoutBook(String bookTitle) {
@@ -95,5 +73,23 @@ public class BookRentService {
 
     public void destroyApp() {
         System.exit(0);
+    }
+
+    private void printLine() {
+        System.out.println("--------------------------------------------------------------------------------------------");
+    }
+
+    private Set<Book> books = new HashSet<Book>();
+
+    private Book searchForBook(Set<Book> books, String bookTitle) {
+        Book bookToSearch;
+
+        for (Book book : books) {
+            if (book.getBookTitle().equals(bookTitle)) {
+                bookToSearch = book;
+                return bookToSearch;
+            }
+        }
+        return null;
     }
 }

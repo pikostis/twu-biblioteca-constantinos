@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.Date;
+import java.util.Formatter;
 
 public class Book {
     private String bookAuthor;
@@ -28,7 +29,10 @@ public class Book {
 
     @Override
     public String toString() {
-        return getBookTitle() + "\t|\t" + getAuthor() + "\t|\t" + getRealeaseDate();
+        StringBuilder sbuf = new StringBuilder();
+        Formatter fmt = new Formatter(sbuf);
+        fmt.format("%-30.30s %-30.30s %-30.30s", getBookTitle(), getAuthor(), getRealeaseDate());
+        return sbuf.toString();
     }
 
     public boolean isBookAvailableForCheckout() {
