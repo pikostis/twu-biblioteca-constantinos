@@ -35,8 +35,10 @@ public class LibraryItemRentService {
         libraryItems.add(libraryItem);
     }
 
-    public boolean checkoutLibraryItem(String itemTitle) {
-        ILibraryItem itemToCheckout = searchForLibraryItem(libraryItems, itemTitle);
+    public boolean checkoutLibraryItem() {
+        String libraryItemTitle = getUserInput();
+
+        ILibraryItem itemToCheckout = searchForLibraryItem(libraryItems, libraryItemTitle);
 
         boolean isItemNotFound = isItemNotFound(itemToCheckout);
 
