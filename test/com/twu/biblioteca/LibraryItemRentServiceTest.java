@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import java.util.Date;
 import static org.junit.Assert.assertFalse;
@@ -35,29 +34,29 @@ public class LibraryItemRentServiceTest {
         unavalableBook.setItemAvailableForCheckout(false);
 
         libraryItemRentService = new LibraryItemRentService();
-        libraryItemRentService.addLibraryItems(book);
-        libraryItemRentService.addLibraryItems(unavalableBook);
+        libraryItemRentService.addBooks(book);
+        libraryItemRentService.addBooks(unavalableBook);
 
     }
 
 //    @Test
 //    public void shouldReturnTrueIfBookIsAvailableForCheckout() {
 //        String bookTitle = "TDD by example";
-//        boolean isBookFound = libraryItemRentService.checkoutLibraryItem(bookTitle);
+//        boolean isBookFound = libraryItemRentService.checkoutBook(bookTitle);
 //        assertTrue(isBookFound);
 //    }
 //
 //    @Test
 //    public void shouldReturnFalseIfBookIsUnavailableForCheckout() {
 //        String bookTitle = "TDD by example 2";
-//        boolean isBookAvailableForCheckout = libraryItemRentService.checkoutLibraryItem(bookTitle);
+//        boolean isBookAvailableForCheckout = libraryItemRentService.checkoutBook(bookTitle);
 //        assertFalse(isBookAvailableForCheckout);
 //    }
 //
 //    @Test
 //    public void shouldReturnTrueIfBookIsAvailableForReturn() {
 //        String bookTitle = "TDD by example 2";
-//        boolean isBookFound = libraryItemRentService.returnLibraryItem();
+//        boolean isBookFound = libraryItemRentService.returnBook();
 //        assertTrue(isBookFound);
 //    }
 

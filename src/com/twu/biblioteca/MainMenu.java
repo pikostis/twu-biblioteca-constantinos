@@ -12,9 +12,11 @@ public class MainMenu {
     public MainMenu() {
         options.put(0, new ListBooksMenuOption());
         options.put(1, new ListBooksWithDetailsMenuOption());
-        options.put(2, new CheckoutMenuOption());
-        options.put(3, new ReturnMenuOption());
-        options.put(4, new QuitMenuOption());
+        options.put(2, new ListMoviesMenuOption());
+        options.put(3, new ListMoviesWithDetailsMenuOption());
+        options.put(4, new CheckoutBookMenuOption());
+        options.put(5, new ReturnBookMenuOption());
+        options.put(6, new QuitMenuOption());
 
         optionsSize = options.size();
 

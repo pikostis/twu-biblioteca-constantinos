@@ -7,38 +7,66 @@ import java.util.Set;
 
 public class LibraryItemRentService {
 
-    public void listAvailableLibraryItems() {
-        printLine();
+    public void listAvailableBooks() {
+        printLine(20);
 
-        for (ILibraryItem libraryItem : libraryItems) {
+        for (ILibraryItem libraryItem : books) {
             if (libraryItem.isItemAvailableForCheckout()) {
                 System.out.println(libraryItem.getItemTitle());
             }
         }
 
-        printLine();
+        printLine(20);
     }
 
-    public void listAvailableLibraryItemsWithDetails() {
-        printLine();
+    public void listAvailableMovies() {
+        printLine(20);
 
-        for (ILibraryItem libraryItem : libraryItems) {
+        for (ILibraryItem libraryItem : movies) {
+            if (libraryItem.isItemAvailableForCheckout()) {
+                System.out.println(libraryItem.getItemTitle());
+            }
+        }
+
+        printLine(20);
+    }
+
+    public void listAvailableLibraryBooksWithDetails() {
+        printLine(92);
+
+        for (ILibraryItem libraryItem : books) {
             if (libraryItem.isItemAvailableForCheckout()) {
                 System.out.println(libraryItem);
             }
         }
 
-        printLine();
+        printLine(92);
     }
 
-    public void addLibraryItems(ILibraryItem libraryItem) {
-        libraryItems.add(libraryItem);
+    public void listAvailableLibraryMoviesWithDetails() {
+        printLine(101);
+
+        for (ILibraryItem libraryItem : movies) {
+            if (libraryItem.isItemAvailableForCheckout()) {
+                System.out.println(libraryItem);
+            }
+        }
+
+        printLine(101);
     }
 
-    public boolean checkoutLibraryItem() {
+    public void addBooks(ILibraryItem libraryItem) {
+        books.add(libraryItem);
+    }
+
+    public void addMovies(ILibraryItem libraryItem) {
+        movies.add(libraryItem);
+    }
+
+    public boolean checkoutBook() {
         String libraryItemTitle = getUserInput();
 
-        ILibraryItem itemToCheckout = searchForLibraryItem(libraryItems, libraryItemTitle);
+        ILibraryItem itemToCheckout = searchForLibraryItem(books, libraryItemTitle);
 
         boolean isItemNotFound = isItemNotFound(itemToCheckout);
 
@@ -52,10 +80,27 @@ public class LibraryItemRentService {
         }
     }
 
-    public boolean returnLibraryItem() {
+    public boolean checkoutMovie() {
         String libraryItemTitle = getUserInput();
 
-        ILibraryItem libraryItemToReturn = searchForLibraryItem(libraryItems, libraryItemTitle);
+        ILibraryItem itemToCheckout = searchForLibraryItem(movies, libraryItemTitle);
+
+        boolean isItemNotFound = isItemNotFound(itemToCheckout);
+
+        if (itemToCheckout.isItemAvailableForCheckout() && !isItemNotFound) {
+            System.out.println("Thank you! Enjoy the movie");
+            itemToCheckout.setItemAvailableForCheckout(false);
+            return true;
+        } else {
+            System.out.println("That movie is not available.");
+            return false;
+        }
+    }
+
+    public boolean returnBook() {
+        String libraryItemTitle = getUserInput();
+
+        ILibraryItem libraryItemToReturn = searchForLibraryItem(books, libraryItemTitle);
 
         boolean isItemNotFound = isItemNotFound(libraryItemToReturn);
         boolean isBookAvailableForReturn = !libraryItemToReturn.isItemAvailableForCheckout();
@@ -70,23 +115,43 @@ public class LibraryItemRentService {
         }
     }
 
+    public boolean returnMovie() {
+        String libraryItemTitle = getUserInput();
+
+        ILibraryItem libraryItemToReturn = searchForLibraryItem(movies, libraryItemTitle);
+
+        boolean isItemNotFound = isItemNotFound(libraryItemToReturn);
+        boolean isBookAvailableForReturn = !libraryItemToReturn.isItemAvailableForCheckout();
+
+        if (isBookAvailableForReturn && !isItemNotFound) {
+            System.out.println("Thank you for returning the movie.");
+            libraryItemToReturn.setItemAvailableForCheckout(true);
+            return true;
+        } else {
+            System.out.println("That is not a valid movie to return.");
+            return false;
+        }
+    }
+
     public void destroyApp() {
         System.exit(0);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private Set<ILibraryItem> books = new HashSet<ILibraryItem>();
+    private Set<ILibraryItem> movies = new HashSet<ILibraryItem>();
+
+
     private boolean isItemNotFound(ILibraryItem libraryItemToReturn) {
         return libraryItemToReturn.getItemTitle().equals(defaultErrorItem.getItemTitle());
     }
-
-    private Set<ILibraryItem> libraryItems = new HashSet<ILibraryItem>();
 
     private String getUserInput() {
         InputStream inputStream = System.in;
         String bookTitle = null;
         while (bookTitle == null || bookTitle.isEmpty()) {
-            System.out.println("Enter book title");
+            System.out.println("Enter item title");
             bookTitle = getBookTitleFromUser(inputStream);
         }
         return bookTitle;
@@ -126,7 +191,10 @@ public class LibraryItemRentService {
         }
     };
 
-    private void printLine() {
-        System.out.println("--------------------------------------------------------------------------------------------");
+    private void printLine(int numberOfChars) {
+        for (int i = 0; i < numberOfChars; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
     }
 }

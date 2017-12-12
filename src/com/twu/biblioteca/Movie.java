@@ -3,26 +3,18 @@ package com.twu.biblioteca;
 import java.util.Date;
 import java.util.Formatter;
 
-public class Movie {
+public class Movie implements ILibraryItem {
     private String movieName;
     private String movieDirector;
     private Date movieReleaseDate;
     private int rating;
-    private boolean isMovieAvailableForCheckout;
+    private boolean isItemAvailableForCheckout;
 
     public Movie(String movieName, String movieDirector, Date movieReleaseDate, int rating) {
         this.movieName = movieName;
         this.movieDirector = movieDirector;
         this.movieReleaseDate = movieReleaseDate;
         this.rating = rating;
-    }
-
-    public void setMovieAvailableForCheckout(boolean isMovieAvailableForCheckout) {
-        this.isMovieAvailableForCheckout = isMovieAvailableForCheckout;
-    }
-
-    public Object getName() {
-        return movieName;
     }
 
     @Override
@@ -33,7 +25,18 @@ public class Movie {
         return sbuf.toString();
     }
 
-    public boolean isMovieAvailableForCheckout() {
-        return isMovieAvailableForCheckout;
+    @Override
+    public boolean isItemAvailableForCheckout() {
+        return isItemAvailableForCheckout;
+    }
+
+    @Override
+    public void setItemAvailableForCheckout(boolean isItemAvailableForCheckout) {
+        this.isItemAvailableForCheckout = isItemAvailableForCheckout;
+    }
+
+    @Override
+    public String getItemTitle() {
+        return movieName;
     }
 }

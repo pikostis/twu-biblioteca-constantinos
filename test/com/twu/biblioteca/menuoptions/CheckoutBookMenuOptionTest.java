@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CheckoutMenuOptionTest {
+public class CheckoutBookMenuOptionTest {
     @Test
     public void name() {
-        assertEquals("Checkout Book", new CheckoutMenuOption().name());
+        assertEquals("Checkout Book", new CheckoutBookMenuOption().name());
     }
 
 }

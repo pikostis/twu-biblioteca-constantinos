@@ -26,12 +26,12 @@ public class MovieTest {
         rating = 7;
 
         movie = new Movie(movieName, movieDirector, movieReleaseDate, rating);
-        movie.setMovieAvailableForCheckout(true);
+        movie.setItemAvailableForCheckout(true);
     }
 
     @Test
     public void shouldReturnMovieName() {
-        assertEquals(movieName, movie.getName());
+        assertEquals(movieName, movie.getItemTitle());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class MovieTest {
 
     @Test
     public void shouldReturnTrueIfMovieIsAvailableForCheckout() {
-        assertTrue(movie.isMovieAvailableForCheckout());
+        assertTrue(movie.isItemAvailableForCheckout());
     }
 
 }

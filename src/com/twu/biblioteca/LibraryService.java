@@ -8,8 +8,11 @@ import java.util.Date;
 import java.util.Map;
 
 public class LibraryService {
+    LibraryItemRentService libraryItemRentService = new LibraryItemRentService();
+
     public void run() {
-        LibraryItemRentService libraryItemRentService = initializeBookRentServiceWithBooks();
+        createMovies();
+        createBooks();
         createMainMenu(libraryItemRentService);
     }
 
@@ -29,7 +32,7 @@ public class LibraryService {
         } while(true);
     }
 
-    private LibraryItemRentService initializeBookRentServiceWithBooks() {
+    private void createBooks() {
         String bookAuthor = "Kent Beck";
         String bookTitle = "TDD by example";
         Date bookReleaseDate = new Date(1990, 2, 23);
@@ -42,9 +45,18 @@ public class LibraryService {
         Book book2 = new Book(bookTitle, bookAuthor, bookReleaseDate);
         book2.setItemAvailableForCheckout(true);
 
-        LibraryItemRentService libraryItemRentService = new LibraryItemRentService();
-        libraryItemRentService.addLibraryItems(book);
-        libraryItemRentService.addLibraryItems(book2);
-        return libraryItemRentService;
+        libraryItemRentService.addBooks(book);
+        libraryItemRentService.addBooks(book2);
+    }
+
+    private void createMovies() {
+        String movieName = "Movie 1";
+        String movieDirector = "John Appleseed";
+        Date movieReleaseDate = new Date(1990,2,23);
+        int rating = 7;
+
+        Movie movie = new Movie(movieName, movieDirector, movieReleaseDate, rating);
+        movie.setItemAvailableForCheckout(true);
+        libraryItemRentService.addMovies(movie);
     }
 }

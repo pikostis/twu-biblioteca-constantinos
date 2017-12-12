@@ -3,10 +3,10 @@ package com.twu.biblioteca.menuoptions;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ReturnMenuOptionTest {
+public class ReturnBookMenuOptionTest {
 
     @Test
     public void name() {
-        assertEquals("Return Item", new ReturnMenuOption().name());
+        assertEquals("Return Book", new ReturnBookMenuOption().name());
     }
 }

@@ -2,14 +2,14 @@ package com.twu.biblioteca.menuoptions;
 
 import com.twu.biblioteca.LibraryItemRentService;
 
-public class CheckoutMenuOption implements IMenuOption {
+public class ListMoviesMenuOption implements IMenuOption {
     @Override
     public String name() {
-        return "Checkout Book";
+        return "List Movies";
     }
 
-    @Override
     public void execute(LibraryItemRentService libraryItemRentService) {
-        libraryItemRentService.checkoutLibraryItem();
+        System.out.println("Movie Title");
+        libraryItemRentService.listAvailableMovies();
     }
 }
