@@ -9,6 +9,7 @@ public class ListBooksMenuOption implements IMenuOption {
     }
 
     public void execute(LibraryItemRentService libraryItemRentService) {
+        System.out.println("Book Title");
         libraryItemRentService.listAvailableLibraryItems();
     }
 }

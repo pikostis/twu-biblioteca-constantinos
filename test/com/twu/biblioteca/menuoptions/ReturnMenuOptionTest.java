@@ -7,6 +7,6 @@ public class ReturnMenuOptionTest {
 
     @Test
     public void name() {
-        assertEquals("Return Book", new ReturnMenuOption().name());
+        assertEquals("Return Item", new ReturnMenuOption().name());
     }
 }

@@ -24,12 +24,12 @@ public class Movie {
     public Object getName() {
         return movieName;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder sbuf = new StringBuilder();
         Formatter fmt = new Formatter(sbuf);
-        fmt.format("%-30.30s %-30.30s %-30.30s %-30.30s", movieName, movieDirector, movieReleaseDate, rating);
+        fmt.format("%-30.30s %-30.30s %-30.30s %-30.30s", movieName, "| " + movieDirector, "| " + movieReleaseDate, "| " + rating);
         return sbuf.toString();
     }
 

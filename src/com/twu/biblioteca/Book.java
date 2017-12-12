@@ -19,7 +19,7 @@ public class Book implements ILibraryItem{
     public String toString() {
         StringBuilder sbuf = new StringBuilder();
         Formatter fmt = new Formatter(sbuf);
-        fmt.format("%-30.30s %-30.30s %-30.30s", bookTitle, bookAuthor, bookReleaseDate);
+        fmt.format("%-30.30s %-30.30s %-30.30s", bookTitle, "| " + bookAuthor, "| " + bookReleaseDate);
         return sbuf.toString();
     }
 

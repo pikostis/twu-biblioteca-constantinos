@@ -1,13 +1,13 @@
 package com.twu.biblioteca;
 
+import java.io.InputStream;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class LibraryItemRentService {
 
     public void listAvailableLibraryItems() {
-        printLine();
-        System.out.println("Item Title");
         printLine();
 
         for (ILibraryItem libraryItem : libraryItems) {
@@ -15,13 +15,11 @@ public class LibraryItemRentService {
                 System.out.println(libraryItem.getItemTitle());
             }
         }
-        printLine();
 
+        printLine();
     }
 
     public void listAvailableLibraryItemsWithDetails() {
-        printLine();
-        System.out.printf("%-30.30s %-30.30s %-30.30s%n", "Title","| Author", "| Release Date");
         printLine();
 
         for (ILibraryItem libraryItem : libraryItems) {
@@ -29,8 +27,8 @@ public class LibraryItemRentService {
                 System.out.println(libraryItem);
             }
         }
-        printLine();
 
+        printLine();
     }
 
     public void addLibraryItems(ILibraryItem libraryItem) {
@@ -40,7 +38,7 @@ public class LibraryItemRentService {
     public boolean checkoutLibraryItem(String itemTitle) {
         ILibraryItem itemToCheckout = searchForLibraryItem(libraryItems, itemTitle);
 
-        boolean isItemNotFound = itemToCheckout.getItemTitle().equals(defaultErrorItem.getItemTitle());
+        boolean isItemNotFound = isItemNotFound(itemToCheckout);
 
         if (itemToCheckout.isItemAvailableForCheckout() && !isItemNotFound) {
             System.out.println("Thank you! Enjoy the book");
@@ -52,10 +50,12 @@ public class LibraryItemRentService {
         }
     }
 
-    public boolean returnLibraryItem(String libraryItemTitle) {
+    public boolean returnLibraryItem() {
+        String libraryItemTitle = getUserInput();
+
         ILibraryItem libraryItemToReturn = searchForLibraryItem(libraryItems, libraryItemTitle);
 
-        boolean isItemNotFound = libraryItemToReturn.getItemTitle().equals(defaultErrorItem.getItemTitle());
+        boolean isItemNotFound = isItemNotFound(libraryItemToReturn);
         boolean isBookAvailableForReturn = !libraryItemToReturn.isItemAvailableForCheckout();
 
         if (isBookAvailableForReturn && !isItemNotFound) {
@@ -72,7 +72,28 @@ public class LibraryItemRentService {
         System.exit(0);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private boolean isItemNotFound(ILibraryItem libraryItemToReturn) {
+        return libraryItemToReturn.getItemTitle().equals(defaultErrorItem.getItemTitle());
+    }
+
     private Set<ILibraryItem> libraryItems = new HashSet<ILibraryItem>();
+
+    private String getUserInput() {
+        InputStream inputStream = System.in;
+        String bookTitle = null;
+        while (bookTitle == null || bookTitle.isEmpty()) {
+            System.out.println("Enter book title");
+            bookTitle = getBookTitleFromUser(inputStream);
+        }
+        return bookTitle;
+    }
+
+    private String getBookTitleFromUser(InputStream inputStream) {
+        Scanner input = new Scanner(inputStream);
+        return input.nextLine();
+    }
 
     private ILibraryItem searchForLibraryItem(Set<ILibraryItem> libraryItems, String libraryItemTitle) {
         ILibraryItem libraryItemToSearch;
