@@ -1,8 +1,8 @@
 package com.twu.biblioteca.menuoptions;
 
-import com.twu.biblioteca.LibraryItemRentService;
+import com.twu.biblioteca.LibraryRentService;
 
 public interface IMenuOption {
     String name();
-    void execute(LibraryItemRentService libraryItemRentService);
+    void execute(LibraryRentService libraryRentService);
 }

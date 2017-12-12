@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class LibraryItemRentService {
+public class LibraryRentService {
 
     public void listAvailableBooks() {
         printLine(20);

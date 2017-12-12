@@ -8,15 +8,15 @@ import java.util.Date;
 import java.util.Map;
 
 public class LibraryService {
-    LibraryItemRentService libraryItemRentService = new LibraryItemRentService();
+    LibraryRentService libraryRentService = new LibraryRentService();
 
     public void run() {
         createMovies();
         createBooks();
-        createMainMenu(libraryItemRentService);
+        createMainMenu(libraryRentService);
     }
 
-    private void createMainMenu(LibraryItemRentService libraryItemRentService) {
+    private void createMainMenu(LibraryRentService libraryRentService) {
         MainMenu mainMenu = new MainMenu();
         int option;
         IMenuOption userOption;
@@ -28,7 +28,7 @@ public class LibraryService {
             mainMenu.listMenuOptions();
             option = mainMenu.getUserOption(inputStream);
             userOption = menuOptions.getOrDefault(option, new InvalidMenuOption());
-            userOption.execute(libraryItemRentService);
+            userOption.execute(libraryRentService);
         } while(true);
     }
 
@@ -45,8 +45,8 @@ public class LibraryService {
         Book book2 = new Book(bookTitle, bookAuthor, bookReleaseDate);
         book2.setItemAvailableForCheckout(true);
 
-        libraryItemRentService.addBooks(book);
-        libraryItemRentService.addBooks(book2);
+        libraryRentService.addBooks(book);
+        libraryRentService.addBooks(book2);
     }
 
     private void createMovies() {
@@ -57,6 +57,6 @@ public class LibraryService {
 
         Movie movie = new Movie(movieName, movieDirector, movieReleaseDate, rating);
         movie.setItemAvailableForCheckout(true);
-        libraryItemRentService.addMovies(movie);
+        libraryRentService.addMovies(movie);
     }
 }

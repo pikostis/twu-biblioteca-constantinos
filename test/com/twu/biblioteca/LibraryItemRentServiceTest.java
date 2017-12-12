@@ -13,7 +13,7 @@ public class LibraryItemRentServiceTest {
     Date bookReleaseDate;
     Book book;
     Book unavalableBook;
-    LibraryItemRentService libraryItemRentService;
+    LibraryRentService libraryRentService;
 
     @Before
     public void initialize() {
@@ -33,30 +33,30 @@ public class LibraryItemRentServiceTest {
         unavalableBook = new Book(bookTitle, bookAuthor, bookReleaseDate);
         unavalableBook.setItemAvailableForCheckout(false);
 
-        libraryItemRentService = new LibraryItemRentService();
-        libraryItemRentService.addBooks(book);
-        libraryItemRentService.addBooks(unavalableBook);
+        libraryRentService = new LibraryRentService();
+        libraryRentService.addBooks(book);
+        libraryRentService.addBooks(unavalableBook);
 
     }
 
 //    @Test
 //    public void shouldReturnTrueIfBookIsAvailableForCheckout() {
 //        String bookTitle = "TDD by example";
-//        boolean isBookFound = libraryItemRentService.checkoutBook(bookTitle);
+//        boolean isBookFound = libraryRentService.checkoutBook(bookTitle);
 //        assertTrue(isBookFound);
 //    }
 //
 //    @Test
 //    public void shouldReturnFalseIfBookIsUnavailableForCheckout() {
 //        String bookTitle = "TDD by example 2";
-//        boolean isBookAvailableForCheckout = libraryItemRentService.checkoutBook(bookTitle);
+//        boolean isBookAvailableForCheckout = libraryRentService.checkoutBook(bookTitle);
 //        assertFalse(isBookAvailableForCheckout);
 //    }
 //
 //    @Test
 //    public void shouldReturnTrueIfBookIsAvailableForReturn() {
 //        String bookTitle = "TDD by example 2";
-//        boolean isBookFound = libraryItemRentService.returnBook();
+//        boolean isBookFound = libraryRentService.returnBook();
 //        assertTrue(isBookFound);
 //    }
 

@@ -7,7 +7,6 @@ import java.util.*;
 
 public class MainMenu {
     private Map<Integer, IMenuOption> options = new HashMap<Integer, IMenuOption>();
-    private int optionsSize;
 
     public MainMenu() {
         options.put(0, new ListBooksMenuOption());
@@ -17,8 +16,6 @@ public class MainMenu {
         options.put(4, new CheckoutBookMenuOption());
         options.put(5, new ReturnBookMenuOption());
         options.put(6, new QuitMenuOption());
-
-        optionsSize = options.size();
 
         welcomeMessage();
     }

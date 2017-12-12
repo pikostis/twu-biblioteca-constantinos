@@ -1,6 +1,6 @@
 package com.twu.biblioteca.menuoptions;
 
-import com.twu.biblioteca.LibraryItemRentService;
+import com.twu.biblioteca.LibraryRentService;
 
 public class ListMoviesWithDetailsMenuOption implements IMenuOption {
     @Override
@@ -9,8 +9,8 @@ public class ListMoviesWithDetailsMenuOption implements IMenuOption {
     }
 
     @Override
-    public void execute(LibraryItemRentService libraryItemRentService) {
+    public void execute(LibraryRentService libraryRentService) {
         System.out.printf("%-30.30s %-30.30s %-30.30s %-30.30s%n", "Movie Name","| Director", "| Release Date", "| Rating");
-        libraryItemRentService.listAvailableLibraryMoviesWithDetails();
+        libraryRentService.listAvailableLibraryMoviesWithDetails();
     }
 }
