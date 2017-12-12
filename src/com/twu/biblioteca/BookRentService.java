@@ -11,8 +11,8 @@ public class BookRentService {
         printLine();
 
         for (Book book : books) {
-            if (book.isBookAvailableForCheckout()) {
-                System.out.println(book.getBookTitle());
+            if (book.isItemAvailableForCheckout()) {
+                System.out.println(book.getItemTitle());
             }
         }
         printLine();
@@ -25,7 +25,7 @@ public class BookRentService {
         printLine();
 
         for (Book book : books) {
-            if (book.isBookAvailableForCheckout()) {
+            if (book.isItemAvailableForCheckout()) {
                 System.out.println(book);
             }
         }
@@ -44,9 +44,9 @@ public class BookRentService {
             return false;
         }
 
-        if (bookToCheckout.isBookAvailableForCheckout()) {
+        if (bookToCheckout.isItemAvailableForCheckout()) {
             System.out.println("Thank you! Enjoy the book");
-            bookToCheckout.setBookAvailableForCheckout(false);
+            bookToCheckout.setItemAvailableForCheckout(false);
             return true;
         } else {
             System.out.println("That book is not available.");
@@ -60,10 +60,10 @@ public class BookRentService {
             System.out.println("That is not a valid book to return.");
             return false;
         }
-        boolean isBookAvailableForReturn = !bookToReturn.isBookAvailableForCheckout();
+        boolean isBookAvailableForReturn = !bookToReturn.isItemAvailableForCheckout();
         if (isBookAvailableForReturn) {
             System.out.println("Thank you for returning the book.");
-            bookToReturn.setBookAvailableForCheckout(true);
+            bookToReturn.setItemAvailableForCheckout(true);
             return true;
         } else {
             System.out.println("That is not a valid book to return.");
@@ -85,7 +85,7 @@ public class BookRentService {
         Book bookToSearch;
 
         for (Book book : books) {
-            if (book.getBookTitle().equals(bookTitle)) {
+            if (book.getItemTitle().equals(bookTitle)) {
                 bookToSearch = book;
                 return bookToSearch;
             }

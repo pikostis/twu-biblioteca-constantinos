@@ -24,33 +24,23 @@ public class BookTest {
         bookReleaseDate = new Date(1990,2,23);
 
         book = new Book(bookTitle, bookAuthor, bookReleaseDate);
-        book.setBookAvailableForCheckout(true);
-    }
-
-    @Test
-    public void shouldReturnBookAuthor() {
-        assertEquals(book.getAuthor(), bookAuthor);
-    }
-
-    @Test
-    public void shouldReturnBookReleaseDate() {
-        assertEquals(book.getRealeaseDate(), new Date(1990, 2, 23));
+        book.setItemAvailableForCheckout(true);
     }
 
     @Test
     public void shouldReturnBookTitle() {
-        assertEquals(book.getBookTitle(), bookTitle);
+        assertEquals(book.getItemTitle(), bookTitle);
     }
 
     @Test
     public void shouldReturnTrueIfBookIsAvailableForCheckout() {
-        assertTrue(book.isBookAvailableForCheckout());
+        assertTrue(book.isItemAvailableForCheckout());
     }
 
     @Test
     public void shouldReturnFalseIfBookIsNotAvailableForCheckout() {
-        book.setBookAvailableForCheckout(false);
-        assertFalse(book.isBookAvailableForCheckout());
-        book.setBookAvailableForCheckout(true);
+        book.setItemAvailableForCheckout(false);
+        assertFalse(book.isItemAvailableForCheckout());
+        book.setItemAvailableForCheckout(true);
     }
 }

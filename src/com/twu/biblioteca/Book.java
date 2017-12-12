@@ -3,11 +3,11 @@ package com.twu.biblioteca;
 import java.util.Date;
 import java.util.Formatter;
 
-public class Book {
+public class Book implements ILibraryItem{
     private String bookAuthor;
     private Date bookReleaseDate;
     private String bookTitle;
-    private boolean isBookAvailableForCheckout;
+    private boolean setItemAvailableForCheckout;
 
     public Book(String bookTitle, String bookAuthor, Date bookReleaseDate) {
         this.bookTitle = bookTitle;
@@ -15,31 +15,26 @@ public class Book {
         this.bookReleaseDate = bookReleaseDate;
     }
 
-    public String getAuthor() {
-        return this.bookAuthor;
-    }
-
-    public Date getRealeaseDate() {
-        return this.bookReleaseDate;
-    }
-
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
     @Override
     public String toString() {
         StringBuilder sbuf = new StringBuilder();
         Formatter fmt = new Formatter(sbuf);
-        fmt.format("%-30.30s %-30.30s %-30.30s", getBookTitle(), getAuthor(), getRealeaseDate());
+        fmt.format("%-30.30s %-30.30s %-30.30s", bookTitle, bookAuthor, bookReleaseDate);
         return sbuf.toString();
     }
 
-    public boolean isBookAvailableForCheckout() {
-        return isBookAvailableForCheckout;
+    @Override
+    public boolean isItemAvailableForCheckout() {
+        return setItemAvailableForCheckout;
     }
 
-    public void setBookAvailableForCheckout(boolean bookAvailableForCheckout) {
-        isBookAvailableForCheckout = bookAvailableForCheckout;
+    @Override
+    public void setItemAvailableForCheckout(boolean setItemAvailableForCheckout) {
+        this.setItemAvailableForCheckout = setItemAvailableForCheckout;
+    }
+
+    @Override
+    public String getItemTitle() {
+        return bookTitle;
     }
 }

@@ -25,14 +25,14 @@ public class BookRentServiceTest {
         bookReleaseDate = new Date(1990,2,23);
 
         book = new Book(bookTitle, bookAuthor, bookReleaseDate);
-        book.setBookAvailableForCheckout(true);
+        book.setItemAvailableForCheckout(true);
 
         bookAuthor = "Kent Beck 2";
         bookTitle = "TDD by example 2";
         bookReleaseDate = new Date(1990,2,23);
 
         unavalableBook = new Book(bookTitle, bookAuthor, bookReleaseDate);
-        unavalableBook.setBookAvailableForCheckout(false);
+        unavalableBook.setItemAvailableForCheckout(false);
 
         bookRentService = new BookRentService();
         bookRentService.addBooks(book);
