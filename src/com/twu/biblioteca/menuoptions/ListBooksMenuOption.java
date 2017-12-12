@@ -1,6 +1,6 @@
 package com.twu.biblioteca.menuoptions;
 
-import com.twu.biblioteca.BookRentService;
+import com.twu.biblioteca.LibraryItemRentService;
 
 public class ListBooksMenuOption implements IMenuOption {
     @Override
@@ -8,7 +8,7 @@ public class ListBooksMenuOption implements IMenuOption {
         return "List Books";
     }
 
-    public void execute(BookRentService bookRentService) {
-        bookRentService.listAvailableBooks();
+    public void execute(LibraryItemRentService libraryItemRentService) {
+        libraryItemRentService.listAvailableLibraryItems();
     }
 }

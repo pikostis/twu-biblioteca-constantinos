@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.Date;
+import java.util.Formatter;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
@@ -35,7 +36,12 @@ public class MovieTest {
 
     @Test
     public void shouldReturnMovieDetails() {
-        assertEquals(movieName + " " + movieDirector + " " + movieReleaseDate + " " + rating, movie.toString());
+            StringBuilder sbuf = new StringBuilder();
+            Formatter fmt = new Formatter(sbuf);
+            fmt.format("%-30.30s %-30.30s %-30.30s %-30.30s", movieName, movieDirector, movieReleaseDate, rating);
+            String result = sbuf.toString();
+
+        assertEquals(result, movie.toString());
     }
 
     @Test

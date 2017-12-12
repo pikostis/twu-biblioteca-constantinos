@@ -1,6 +1,6 @@
 package com.twu.biblioteca.menuoptions;
 
-import com.twu.biblioteca.BookRentService;
+import com.twu.biblioteca.LibraryItemRentService;
 
 public class QuitMenuOption implements IMenuOption {
     @Override
@@ -9,7 +9,7 @@ public class QuitMenuOption implements IMenuOption {
     }
 
     @Override
-    public void execute(BookRentService bookRentService) {
-        bookRentService.destroyApp();
+    public void execute(LibraryItemRentService libraryItemRentService) {
+        libraryItemRentService.destroyApp();
     }
 }

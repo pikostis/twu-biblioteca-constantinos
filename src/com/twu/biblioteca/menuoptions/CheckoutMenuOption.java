@@ -1,6 +1,6 @@
 package com.twu.biblioteca.menuoptions;
 
-import com.twu.biblioteca.BookRentService;
+import com.twu.biblioteca.LibraryItemRentService;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -11,11 +11,19 @@ public class CheckoutMenuOption implements IMenuOption {
     }
 
     @Override
-    public void execute(BookRentService bookRentService) {
+    public void execute(LibraryItemRentService libraryItemRentService) {
+        String bookTitle = getUserInput();
+        libraryItemRentService.checkoutLibraryItem(bookTitle);
+    }
+
+    private String getUserInput() {
         InputStream inputStream = System.in;
-        System.out.println("Enter book title");
-        String bookTitle = getBookTitleFromUser(inputStream);
-        bookRentService.checkoutBook(bookTitle);
+        String bookTitle = null;
+        while (bookTitle == null || bookTitle.isEmpty()) {
+            System.out.println("Enter book title");
+            bookTitle = getBookTitleFromUser(inputStream);
+        }
+        return bookTitle;
     }
 
     private String getBookTitleFromUser(InputStream inputStream) {

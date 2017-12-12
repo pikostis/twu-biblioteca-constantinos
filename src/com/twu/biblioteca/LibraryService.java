@@ -9,11 +9,11 @@ import java.util.Map;
 
 public class LibraryService {
     public void run() {
-        BookRentService bookRentService = initializeBookRentServiceWithBooks();
-        createMainMenu(bookRentService);
+        LibraryItemRentService libraryItemRentService = initializeBookRentServiceWithBooks();
+        createMainMenu(libraryItemRentService);
     }
 
-    private void createMainMenu(BookRentService bookRentService) {
+    private void createMainMenu(LibraryItemRentService libraryItemRentService) {
         MainMenu mainMenu = new MainMenu();
         int option;
         IMenuOption userOption;
@@ -25,11 +25,11 @@ public class LibraryService {
             mainMenu.listMenuOptions();
             option = mainMenu.getUserOption(inputStream);
             userOption = menuOptions.getOrDefault(option, new InvalidMenuOption());
-            userOption.execute(bookRentService);
+            userOption.execute(libraryItemRentService);
         } while(true);
     }
 
-    private BookRentService initializeBookRentServiceWithBooks() {
+    private LibraryItemRentService initializeBookRentServiceWithBooks() {
         String bookAuthor = "Kent Beck";
         String bookTitle = "TDD by example";
         Date bookReleaseDate = new Date(1990, 2, 23);
@@ -42,9 +42,9 @@ public class LibraryService {
         Book book2 = new Book(bookTitle, bookAuthor, bookReleaseDate);
         book2.setItemAvailableForCheckout(true);
 
-        BookRentService bookRentService = new BookRentService();
-        bookRentService.addBooks(book);
-        bookRentService.addBooks(book2);
-        return bookRentService;
+        LibraryItemRentService libraryItemRentService = new LibraryItemRentService();
+        libraryItemRentService.addLibraryItems(book);
+        libraryItemRentService.addLibraryItems(book2);
+        return libraryItemRentService;
     }
 }

@@ -7,14 +7,14 @@ import java.util.Date;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class BookRentServiceTest {
+public class LibraryItemRentServiceTest {
 
     String bookAuthor;
     String bookTitle;
     Date bookReleaseDate;
     Book book;
     Book unavalableBook;
-    BookRentService bookRentService;
+    LibraryItemRentService libraryItemRentService;
 
     @Before
     public void initialize() {
@@ -34,30 +34,30 @@ public class BookRentServiceTest {
         unavalableBook = new Book(bookTitle, bookAuthor, bookReleaseDate);
         unavalableBook.setItemAvailableForCheckout(false);
 
-        bookRentService = new BookRentService();
-        bookRentService.addBooks(book);
-        bookRentService.addBooks(unavalableBook);
+        libraryItemRentService = new LibraryItemRentService();
+        libraryItemRentService.addLibraryItems(book);
+        libraryItemRentService.addLibraryItems(unavalableBook);
 
     }
 
     @Test
     public void shouldReturnTrueIfBookIsAvailableForCheckout() {
         String bookTitle = "TDD by example";
-        boolean isBookFound = bookRentService.checkoutBook(bookTitle);
+        boolean isBookFound = libraryItemRentService.checkoutLibraryItem(bookTitle);
         assertTrue(isBookFound);
     }
 
     @Test
     public void shouldReturnFalseIfBookIsUnavailableForCheckout() {
         String bookTitle = "TDD by example 2";
-        boolean isBookAvailableForCheckout = bookRentService.checkoutBook(bookTitle);
+        boolean isBookAvailableForCheckout = libraryItemRentService.checkoutLibraryItem(bookTitle);
         assertFalse(isBookAvailableForCheckout);
     }
 
     @Test
     public void shouldReturnTrueIfBookIsAvailableForReturn() {
         String bookTitle = "TDD by example 2";
-        boolean isBookFound = bookRentService.returnBook(bookTitle);
+        boolean isBookFound = libraryItemRentService.returnLibraryItem(bookTitle);
         assertTrue(isBookFound);
     }
 
